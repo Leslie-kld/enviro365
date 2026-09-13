@@ -18,7 +18,6 @@ services:
     rootDir: enviro365-frontend
     buildCommand: npm install && npm run build
     staticPublishPath: dist
-    plan: free
     branch: main
     autoDeploy: true
     envVars:
