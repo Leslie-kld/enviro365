@@ -1,0 +1,29 @@
+services:
+  - type: web
+    name: enviro365-backend
+    runtime: docker
+    rootDir: enviro365-backend
+    dockerfilePath: ./Dockerfile
+    plan: free
+    region: oregon
+    branch: main
+    autoDeploy: true
+    envVars:
+      - key: PORT
+        value: 8080
+
+  - type: web
+    name: enviro365-frontend
+    runtime: static
+    rootDir: enviro365-frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    plan: free
+    region: oregon
+    branch: main
+    autoDeploy: true
+    envVars:
+      - key: VITE_API_BASE_URL
+        # This must match the backend's actual URL + /api once deployed,
+        # e.g. https://enviro365-backend.onrender.com/api
+        value: https://enviro365-backend.onrender.com/api
